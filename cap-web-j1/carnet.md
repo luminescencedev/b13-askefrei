@@ -3,7 +3,7 @@
 
 Un carnet par binôme, rempli au fil de l'eau avec vos propres mots. Une phrase honnête (« j'ai essayé X, j'ai vu Y, je ne comprends pas pourquoi ») vaut mieux qu'une phrase parfaite recopiée. Aucune donnée personnelle, aucune clé ni jeton, ni l'adresse complète que `dsh web` affiche (elle contient un jeton). C'est aussi votre journal de décisions (astuce 13) : ce que vous avez demandé, ce qui a cassé, ce que vous avez refusé, et pourquoi.
 
-Binôme : groupe b13 — Arthur Garnier + (nom du binôme à compléter)
+Binôme : groupe b13 — Arthur Garnier + Noé Le Roux
 
 Thème provisoire et public visé : AskEfrei, assistant de discussion pour l'application d'une école supérieure d'ingénieurs (type Efrei Paris), destiné aux étudiants (et futurs étudiants) qui cherchent une information pratique sur la vie de l'école.
 
@@ -12,7 +12,7 @@ Trois questions auxquelles l'assistant pourrait répondre :
 2. Comment obtenir mon certificat de scolarité ?
 3. Qui contacter pour un stage ou une alternance ?
 
-Rôles de départ et moments d'échange : Arthur manipule, le binôme vérifie. Échange des rôles toutes les ~20 min (premier échange : relance du serveur à l'étape 5 de J1-01).
+Rôles de départ et moments d'échange : Arthur manipule, Noé vérifie. Échange des rôles toutes les ~20 min (premier échange : relance du serveur à l'étape 5 de J1-01).
 
 ## Cahier personnel (remis par le formateur en J1-01)
 
@@ -26,8 +26,8 @@ Recopiez les valeurs telles que le formateur vous les a remises. Ne les changez 
 
 Notez le dossier de lancement, la commande et sa sortie exacte, surtout quand un outil a bloqué.
 
-- Dossier :
-- Commande et résultat :
+- Dossier : `cap-web-j1/atelier`
+- Commande et résultat : `node --version` donne v26.7.0 (minimum 24.20 respecté). `npm start` affiche « Cap Web prêt sur http://127.0.0.1:3000/ ». La page, `styles.css` et `js/app.js` répondent en HTTP 200. Aucun blocage.
 
 Pour chaque checkpoint : cochez la case quand toute la preuve de la fiche est réunie, collez la preuve (texte, commande ou phrase), puis notez ce que vous avez prédit, essayé, observé, et une difficulté qui reste.
 
@@ -36,10 +36,10 @@ Pour chaque checkpoint : cochez la case quand toute la preuve de la fiche est r�
 ### J1-01 · 🧭 Équipage — [fiche](checkpoints/J1-01-equipage.md)
 
 - [ ] Validé
-- Preuve (page de départ affichée sur votre poste, cahier personnel recopié ci-dessus) :
-- Le `p#status` est-il vide dans le HTML ? Qui écrit sa phrase ?
-- Décision prise ensemble :
-- Difficulté qui reste :
+- Preuve (page de départ affichée sur votre poste, cahier personnel recopié ci-dessus) : serveur lancé avec `npm start` dans `atelier`, page de départ servie sur http://127.0.0.1:3000 (statut « Votre point de départ est prêt. »). Fichiers de la page : `index.html`, `styles.css`, `js/app.js`. Dans `index.html` : `main` (ligne 9), `h1` (ligne 10), `p#status` (ligne 12).
+- Le `p#status` est-il vide dans le HTML ? Qui écrit sa phrase ? Oui, il est vide dans `index.html`. C'est `public/js/app.js` qui écrit sa phrase au chargement, avec `document.querySelector('#status').textContent = ...`.
+- Décision prise ensemble : thème AskEfrei (assistant pour les étudiants d'une école supérieure). Une personne manipule, l'autre vérifie, échange toutes les ~20 min. Un seul dépôt GitHub public, `b13-askefrei`, partagé par Arthur.
+- Difficulté qui reste : le dossier du zip est arrivé dans un sous-dossier `cap-web-j1`, il faut penser à lancer `npm start` depuis `cap-web-j1/atelier`.
 
 ### J1-02 · 💬 Premier prompt — [fiche](checkpoints/J1-02-premier-prompt.md)
 
