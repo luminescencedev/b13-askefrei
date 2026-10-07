@@ -40,6 +40,14 @@ function mettreAJourCompteur() {
 
 champ.addEventListener('input', mettreAJourCompteur);
 
+// Au clavier : Entrée envoie le message, Maj+Entrée va à la ligne.
+champ.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+    event.preventDefault();
+    formulaire.requestSubmit();
+  }
+});
+
 formulaire.addEventListener('submit', (event) => {
   event.preventDefault();
   const controle = validateMessage(champ.value);
