@@ -96,3 +96,8 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 - Constat : prédiction vérifiée. La liste se met à jour toute seule (elle est calculée depuis `MOTS`), mais le mot « deux » reste.
 - Correction : le nombre est maintenant calculé avec `${Object.keys(MOTS).length}`. La liste des mots est mise en forme avec `Intl.ListFormat` (« « orage », « bougie » et « partiels » »).
 - Troisième mot : `partiels`.
+
+### Étape 2 · Le compteur de caractères
+
+- `<p id="compteur">` sous le champ, relié au `textarea` par `aria-describedby="compteur"`. Dans `app.js`, `mettreAJourCompteur()` écrit « longueur / 240 » au chargement, à chaque événement `input` et après l'envoi.
+- Vérifié dans Chromium : « 0 / 240 » au départ, « 5 / 240 » après avoir tapé `salut`, « 0 / 240 » après l'envoi, aucune erreur dans la console.
