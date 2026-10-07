@@ -27,11 +27,18 @@ Les tests rouges du départ, et ce que vous en avez fait :
 
 | Test rouge | Cause trouvée (une phrase) | Fichier | Message du commit `fix:` |
 |---|---|---|---|
-| | | | |
+| refuse le vide et les espaces seuls | `validateMessage` testait `raw === ''` avant le `trim()`, donc `'   '` passait. | `public/js/brain.js` | fix: un message fait d'espaces seuls est refusé |
+| accepte 240 caractères et refuse 241 | La limite était écrite en dur (`280`) au lieu d'utiliser `LIMITE`. | `public/js/brain.js` | fix: la limite de longueur utilise LIMITE au lieu de 280 |
+| ignore la casse et les espaces autour | `replyTo` mettait le message en minuscules sans retirer les espaces autour. | `public/js/brain.js` | fix: replyTo ignore les espaces autour du message |
+| reconnaît les deux mots du cahier personnel… | Même cause que la ligne précédente : `'  ORAGE '` n'était pas reconnu. Corrigé par le même commit. | `public/js/brain.js` | fix: replyTo ignore les espaces autour du message |
+| view.js affiche du texte et ne décide pas des réponses | `view.js` construisait la ligne avec `innerHTML`, donc `<b>gras</b>` devenait du HTML. | `public/js/view.js` | fix: view.js affiche le message avec du texte, sans innerHTML |
+| répond à une phrase inconnue par un repli distinct | Une phrase inconnue recevait la réponse de « aide » : il manquait une réponse `repli`. | `public/js/brain.js` | fix: une phrase inconnue reçoit un repli distinct de aide |
 
-Avec l'agent : ce qu'il a proposé et que vous avez refusé, et pourquoi.
+Résultat : `node --test tests/contrat/brain.contrat.test.js` donne `pass 15`, `fail 0`. `git diff --stat depart -- tests cahier-personnel.json` n'affiche rien.
 
-Pour aller plus loin : le nom renommé par votre commit `refactor:`, et pourquoi le nouveau est plus clair.
+Avec l'agent : corrections faites sans dsh (avec Claude Code). Règle suivie : ne jamais modifier `tests/` ni `cahier-personnel.json`, corriger le code et pas le test.
+
+Pour aller plus loin : `liste` devient `motsConnus` dans `brain.js`. L'ancien nom ne disait pas ce qu'il contenait (dans `app.js`, `liste` désigne aussi la liste HTML des messages) ; le nouveau dit que ce sont les mots que Cap Web reconnaît.
 
 ## R2 · Documenter le projet
 
