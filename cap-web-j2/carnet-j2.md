@@ -87,3 +87,12 @@ Pour aller plus loin : patch 2 corrigé dans `abordage/mon-patch.patch`. Le cont
 ## Fin de journée
 
 Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas faire ce matin. Relisez votre positionnement : une notion est-elle passée de « à renforcer » à « à l'aise » ?
+
+## J3 · Terminer Cap Web
+
+### Étape 1 · Le troisième mot
+
+- Prédiction, avant de toucher au code : après l'ajout d'un troisième mot, « aide » annoncera encore « deux mots », parce que ce nombre est écrit à la main dans la phrase `aide` de `REPONSES`.
+- Constat : prédiction vérifiée. La liste se met à jour toute seule (elle est calculée depuis `MOTS`), mais le mot « deux » reste.
+- Correction : le nombre est maintenant calculé avec `${Object.keys(MOTS).length}`. La liste des mots est mise en forme avec `Intl.ListFormat` (« « orage », « bougie » et « partiels » »).
+- Troisième mot : `partiels`.

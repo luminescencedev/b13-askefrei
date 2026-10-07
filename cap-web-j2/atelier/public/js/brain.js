@@ -5,14 +5,15 @@ export const LIMITE = 240;
 
 const MOTS = {
   orage: 'Un orage sur le trajet vers le campus ? Prenez un parapluie et consultez votre emploi du temps en ligne avant de partir.',
-  bougie: 'Une bougie à souffler ? AskEfrei souhaite un joyeux anniversaire à toute la promo !'
+  bougie: 'Une bougie à souffler ? AskEfrei souhaite un joyeux anniversaire à toute la promo !',
+  partiels: 'Les partiels approchent ? Révisez un peu chaque jour et vérifiez vos dates d’examen dans votre emploi du temps.'
 };
 
-const motsConnus = Object.keys(MOTS).map((mot) => `« ${mot} »`).join(' et ');
+const motsConnus = new Intl.ListFormat('fr', { type: 'conjunction' }).format(Object.keys(MOTS).map((mot) => `« ${mot} »`));
 
 const REPONSES = {
   salut: 'Bonjour ! Je suis AskEfrei, l’assistant à règles des étudiants. Écrivez « aide » pour voir ce que je sais faire.',
-  aide: `Je connais « salut », « aide », « test », et deux mots à moi : ${motsConnus}.`,
+  aide: `Je connais « salut », « aide », « test », et ${Object.keys(MOTS).length} mots à moi : ${motsConnus}.`,
   test: 'Test bien reçu : mes règles fonctionnent.',
   repli: 'Je ne connais pas encore cette phrase. Écrivez « aide » pour voir les mots que je connais.'
 };
