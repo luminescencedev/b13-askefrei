@@ -1,4 +1,4 @@
-// Cap Web — cerveau à règles. Fonctions pures : aucun accès à la page.
+// AskEfrei (projet Cap Web) — cerveau à règles. Fonctions pures : aucun accès à la page.
 
 // Réglages du binôme b13 : mêmes valeurs que cahier-personnel.json.
 export const LIMITE = 240;
@@ -11,7 +11,7 @@ const MOTS = {
 const motsConnus = Object.keys(MOTS).map((mot) => `« ${mot} »`).join(' et ');
 
 const REPONSES = {
-  salut: 'Bonjour ! Je suis Cap Web, un assistant à règles. Écrivez « aide » pour voir ce que je sais faire.',
+  salut: 'Bonjour ! Je suis AskEfrei, l’assistant à règles des étudiants. Écrivez « aide » pour voir ce que je sais faire.',
   aide: `Je connais « salut », « aide », « test », et deux mots à moi : ${motsConnus}.`,
   test: 'Test bien reçu : mes règles fonctionnent.',
   repli: 'Je ne connais pas encore cette phrase. Écrivez « aide » pour voir les mots que je connais.'
