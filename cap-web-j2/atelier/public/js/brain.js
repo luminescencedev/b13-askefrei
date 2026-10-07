@@ -13,7 +13,7 @@ const motsConnus = new Intl.ListFormat('fr', { type: 'conjunction' }).format(Obj
 
 const REPONSES = {
   salut: 'Bonjour ! Je suis AskEfrei, l’assistant à règles des étudiants. Écrivez « aide » pour voir ce que je sais faire.',
-  aide: `Je connais « salut », « aide », « test », et ${Object.keys(MOTS).length} mots à moi : ${motsConnus}.`,
+  aide: `Je connais « salut », « aide », « test », et ${Object.keys(MOTS).length} mots à moi : ${motsConnus}. Écrivez « conseil » pour recevoir un conseil du jour.`,
   test: 'Test bien reçu : mes règles fonctionnent.',
   repli: 'Je ne connais pas encore cette phrase. Écrivez « aide » pour voir les mots que je connais.'
 };

@@ -124,3 +124,9 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 - Dans `server/app.js`, au-dessus de `/version.json` : `/api/conseil` renvoie `{ "conseil": "…" }`, tiré au hasard parmi 3 conseils (tableau `CONSEILS`), avec `content-type: application/json`.
 - Après redémarrage du serveur, http://127.0.0.1:3000/api/conseil affiche par exemple `{"conseil":"Relisez vos notes de cours le soir même : dix minutes suffisent pour retenir bien plus."}`.
 - Test `tests/conseil.test.js` (copie de `server.test.js` jusqu'à `after`, puis un seul test) : statut 200, `content-type` qui contient `application/json`, et `conseil` est un texte non vide. Vu rouge avant la route (`actual: 404`), vert après. `npm test` : pass 50, fail 0.
+
+### Étape 7 · AskEfrei donne un conseil
+
+- Dans `app.js`, `async function demanderConseil()` appelle `/api/conseil` avec `fetch`, vérifie `reponse.ok` et le JSON, et renvoie « Le serveur ne répond pas : conseil indisponible. » en cas d'erreur.
+- L'écouteur `submit` devient `async` : si le message (en minuscules) vaut « conseil », la réponse est `await demanderConseil()`, sinon `replyTo` comme avant. Le message de l'utilisateur s'affiche avant l'attente. La phrase « aide » mentionne maintenant « conseil ».
+- Vérifié dans Chromium : « Conseil » affiche un des trois conseils ; serveur arrêté, page déjà ouverte, « conseil » affiche le message d'erreur, le formulaire reste visible et aucune erreur JavaScript.
