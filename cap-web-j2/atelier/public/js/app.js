@@ -84,11 +84,21 @@ mettreAJourCompteur();
 charger();
 renderMessages(historique, liste);
 
-fetch('/version.json', { headers: { accept: 'application/json' } })
-  .then((reponse) => (reponse.ok ? reponse.json() : null))
-  .then((donnees) => {
-    if (donnees && typeof donnees.version === 'string' && versionElt) {
-      versionElt.textContent = `version ${donnees.version}`;
+// Pied de page : la version vient du serveur ; en cas de panne, un message clair.
+async function afficherVersion() {
+  try {
+    const reponse = await fetch('/version.json', { headers: { accept: 'application/json' } });
+    if (!reponse.ok) {
+      throw new Error(`HTTP ${reponse.status}`);
     }
-  })
-  .catch(() => {});
+    const donnees = await reponse.json();
+    if (typeof donnees.version !== 'string') {
+      throw new Error('version absente');
+    }
+    versionElt.textContent = `version ${donnees.version}`;
+  } catch {
+    versionElt.textContent = 'version indisponible';
+  }
+}
+
+afficherVersion();

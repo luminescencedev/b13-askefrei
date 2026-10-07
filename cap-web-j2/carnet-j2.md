@@ -112,3 +112,9 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 
 - Media query `@media (max-width: 600px)` à la fin de `styles.css` : le bouton Envoyer passe en `width: 100%`.
 - Mesuré dans Chromium : à 375 px, bouton 343 px pour un formulaire de 343 px (toute la largeur) ; à 1280 px, bouton 115 px, inchangé. Pas de défilement horizontal dans les deux cas.
+
+### Étape 5 · Plan B : la version, même en cas de panne
+
+- Le `fetch` en `.then` devient `async function afficherVersion()`, avec `await`, `try`/`catch` et la vérification de `reponse.ok`.
+- Vérifié dans Chromium : pied de page « version dev » avec `/version.json` ; « version indisponible » avec `/version2.json` (404) ; « version dev » de nouveau une fois le bon chemin remis.
+- Bonus fait avant : thème sombre avec `prefers-color-scheme: dark`, en changeant seulement les variables de `:root`. axe-core ne trouve aucune violation en clair ni en sombre.
