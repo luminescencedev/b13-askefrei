@@ -107,3 +107,8 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 - Lighthouse 13.5 (Chromium, catégorie Accessibilité seule), page complète : **100**.
 - Sans la balise `label` du champ : **93**, avec l'alerte « Form elements do not have associated labels » (audit `label`). Label remis ensuite : `git status` ne liste plus `index.html`.
 - Essai au clavier seul : un Tab suffit pour atteindre le champ. Problème trouvé : Entrée ajoute un retour à la ligne dans le `textarea` au lieu d'envoyer, et le message n'est pas envoyé. Corrigé juste après (commit `fix:` séparé) : Entrée envoie, Maj+Entrée va à la ligne.
+
+### Étape 4 · La version mobile
+
+- Media query `@media (max-width: 600px)` à la fin de `styles.css` : le bouton Envoyer passe en `width: 100%`.
+- Mesuré dans Chromium : à 375 px, bouton 343 px pour un formulaire de 343 px (toute la largeur) ; à 1280 px, bouton 115 px, inchangé. Pas de défilement horizontal dans les deux cas.

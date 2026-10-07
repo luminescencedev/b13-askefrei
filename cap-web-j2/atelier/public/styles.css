@@ -116,3 +116,11 @@ button:hover {
 footer {
   font-size: 0.9rem;
 }
+
+/* Version mobile : sous 600 px, le bouton Envoyer prend toute la largeur. */
+@media (max-width: 600px) {
+  #chat-form button[type="submit"] {
+    align-self: stretch;
+    width: 100%;
+  }
+}
