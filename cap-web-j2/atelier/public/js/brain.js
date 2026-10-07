@@ -1,12 +1,11 @@
 // Cap Web — cerveau à règles. Fonctions pures : aucun accès à la page.
 
-// Vos réglages : recopiez ici la limite et les deux mots de votre cahier-personnel.json.
-// Les valeurs écrites ci-dessous sont celles de l'exemple (240, boussole, refuge), pas les vôtres.
+// Réglages du binôme b13 : mêmes valeurs que cahier-personnel.json.
 export const LIMITE = 240;
 
 const MOTS = {
-  boussole: 'La boussole indique le nord.',
-  refuge: 'Un refuge accueille les randonneurs.'
+  orage: 'Un orage sur le trajet vers le campus ? Prenez un parapluie et consultez votre emploi du temps en ligne avant de partir.',
+  bougie: 'Une bougie à souffler ? AskEfrei souhaite un joyeux anniversaire à toute la promo !'
 };
 
 const liste = Object.keys(MOTS).map((mot) => `« ${mot} »`).join(' et ');
