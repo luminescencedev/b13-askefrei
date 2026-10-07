@@ -2,8 +2,8 @@
   color-scheme: light;
   --fond: #ffffff;
   --texte: #111111;
-  --accent: #0b5fff;
-  --accent-fonce: #003ecb;
+  --accent: #00695c;
+  --accent-fonce: #004d40;
   --bord: #333333;
   --fond-bot: #eef3ff;
   --fond-survol: #f2f3f5;
@@ -134,8 +134,8 @@ footer {
     color-scheme: dark;
     --fond: #121418;
     --texte: #eceff4;
-    --accent: #2f6fff;
-    --accent-fonce: #1a4fd6;
+    --accent: #00796b;
+    --accent-fonce: #00695c;
     --bord: #8a93a3;
     --fond-bot: #1c2433;
     --fond-survol: #252a33;
