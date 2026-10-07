@@ -1,0 +1,9 @@
+# Fichiers de cours : jamais dans le depot (fiches-cles.txt contient des cles)
+fiches-cles.txt
+*.zip
+*.pdf
+J3-LES-12-ETAPES.md
+node_modules/
+.env
+.env.*
+cap-web-j2/abordage/essai-*/
