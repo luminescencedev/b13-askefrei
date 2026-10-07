@@ -18,9 +18,9 @@ Rôles de départ et moments d'échange : Arthur manipule, Noé vérifie. Échan
 
 Recopiez les valeurs telles que le formateur vous les a remises. Ne les changez pas, ne les échangez pas avec un autre binôme.
 
-- Limite de caractères d'un message (le nombre N) :
-- Premier mot reconnu, en plus de « salut », « aide » et « test » :
-- Second mot reconnu :
+- Limite de caractères d'un message (le nombre N) : 240
+- Premier mot reconnu, en plus de « salut », « aide » et « test » : orage
+- Second mot reconnu : bougie
 
 ## Commandes essayées
 
