@@ -1,0 +1,56 @@
+diff --git a/public/js/brain.js b/public/js/brain.js
+index 0e4c76f..3aaf4e0 100644
+--- a/public/js/brain.js
++++ b/public/js/brain.js
+@@ -15,6 +15,7 @@ const REPONSES = {
+   salut: 'Bonjour ! Je suis Cap Web, un assistant à règles. Écrivez « aide » pour voir ce que je sais faire.',
+   aide: `Je connais « salut », « aide », « test », et deux mots à moi : ${liste}.`,
+   test: 'Test bien reçu : mes règles fonctionnent.',
++  auRevoir: 'Au revoir, et bonne route !',
+   repli: 'Je ne connais pas encore cette phrase. Écrivez « aide » pour voir les mots que je connais.'
+ };
+ 
+@@ -32,8 +33,13 @@ export function validateMessage(raw) {
+   return { ok: true, value };
+ }
+ 
++// Une seule façon de comparer les messages : sans espaces autour, en minuscules.
++export function normaliser(message) {
++  return String(message).trim().toLowerCase();
++}
++
+ export function replyTo(message) {
+-  const texte = String(message).trim().toLowerCase();
++  const texte = normaliser(message);
+   if (texte === 'salut' || texte === 'bonjour') {
+     return REPONSES.salut;
+   }
+@@ -43,6 +49,9 @@ export function replyTo(message) {
+   if (texte === 'test') {
+     return REPONSES.test;
+   }
++  if (texte === 'au revoir') {
++    return REPONSES.auRevoir;
++  }
+   if (Object.hasOwn(MOTS, texte)) {
+     return MOTS[texte];
+   }
+diff --git a/tests/normaliser.test.js b/tests/normaliser.test.js
+new file mode 100644
+index 0000000..7b581e8
+--- /dev/null
++++ b/tests/normaliser.test.js
+@@ -0,0 +1,13 @@
++import { it } from 'node:test';
++import assert from 'node:assert/strict';
++import { normaliser, replyTo } from '../public/js/brain.js';
++
++it('normaliser retire les espaces autour et met le message en minuscules', () => {
++  assert.equal(normaliser('BonJour'), 'bonjour');
++  assert.equal(normaliser('  SALUT '), 'salut');
++});
++
++it('répond à « au revoir » par une réponse propre, quelles que soient la casse et les espaces autour', () => {
++  assert.notEqual(replyTo('au revoir'), replyTo('parle-moi de la météo'));
++  assert.equal(replyTo('  AU REVOIR '), replyTo('au revoir'));
++});
