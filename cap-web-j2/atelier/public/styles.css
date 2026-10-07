@@ -5,6 +5,9 @@
   --accent: #0b5fff;
   --accent-fonce: #003ecb;
   --bord: #333333;
+  --fond-bot: #eef3ff;
+  --fond-survol: #f2f3f5;
+  --texte-bouton: #ffffff;
 }
 
 * {
@@ -50,7 +53,7 @@ h2 {
 
 /* Réponses de l'assistant, distinguées des messages de l'utilisateur. */
 #messages li.bot {
-  background: #eef3ff;
+  background: var(--fond-bot);
   border-left: 0.35rem solid var(--accent);
 }
 
@@ -80,7 +83,7 @@ button {
   padding: 0.6rem 1.2rem;
   font: inherit;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--texte-bouton);
   background: var(--accent);
   border: 2px solid var(--accent-fonce);
   border-radius: 0.5rem;
@@ -110,7 +113,7 @@ button:hover {
 }
 
 #effacer:hover {
-  background: #f2f3f5;
+  background: var(--fond-survol);
 }
 
 footer {
@@ -122,5 +125,20 @@ footer {
   #chat-form button[type="submit"] {
     align-self: stretch;
     width: 100%;
+  }
+}
+
+/* Thème sombre : seules les variables de :root changent. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --fond: #121418;
+    --texte: #eceff4;
+    --accent: #2f6fff;
+    --accent-fonce: #1a4fd6;
+    --bord: #8a93a3;
+    --fond-bot: #1c2433;
+    --fond-survol: #252a33;
+    --texte-bouton: #ffffff;
   }
 }
