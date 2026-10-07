@@ -2,34 +2,68 @@
 
 ## À quoi sert AskEfrei
 
-AskEfrei est un assistant de discussion pour les étudiants d'une école d'ingénieurs, construit pendant le module « Renforcement Dev Web ».
-Il répond avec des règles écrites à la main (pas une IA réelle) : « salut », « aide », « test » et deux mots propres au binôme b13.
-Les messages restent du texte, la conversation est gardée dans le navigateur, et un contrat de tests vérifie chaque règle.
+AskEfrei est un assistant de discussion pour les étudiants d'une école d'ingénieurs, construit par le binôme b13 (Arthur Garnier, Noé Le Roux) pendant le module « Renforcement Dev Web ».
+Il répond avec des règles écrites à la main, pas avec une IA réelle : « salut » (ou « bonjour »), « aide », « test », trois mots à lui (« orage », « bougie », « partiels »), et « conseil », qui demande un conseil du jour au serveur.
+Un message vide ou de plus de 240 caractères est refusé avec une erreur visible, le texte reste du texte (jamais du HTML), et la conversation est gardée dans le navigateur. La page fonctionne au clavier, sur téléphone et en thème sombre.
 
-## Installer et lancer
+## Installer
 
-Il faut Node.js 24.20 ou plus. Dans un terminal ouvert dans le dossier `atelier` :
+Il faut Node.js 24.20 ou plus et Git. Depuis le dossier où vous rangez vos projets :
 
 ```sh
+git clone https://github.com/luminescencedev/b13-askefrei.git
+cd b13-askefrei/cap-web-j2/atelier
 node --version
 npm ci
+```
+
+`npm ci` installe exactement les versions de `package-lock.json`. Il annonce une vulnérabilité dans les outils de développement : ne lancez pas `npm audit fix`.
+
+## Lancer
+
+Dans `cap-web-j2/atelier` :
+
+```sh
 npm start
 ```
 
-Ouvrez ensuite http://127.0.0.1:3000 dans le navigateur. Ctrl+C arrête le serveur.
+Ouvrez http://127.0.0.1:3000 dans le navigateur. Ctrl+C arrête le serveur. Si le port 3000 est déjà pris, choisissez-en un autre : `PORT=3001 npm start` (sous PowerShell : `$env:PORT=3001`, puis `npm start`).
 
-Pour lancer les tests et le contrôle du code (dans `atelier`) :
+## Tester
+
+Dans `cap-web-j2/atelier` :
 
 ```sh
 npm test
 npm run lint
 ```
 
+`npm test` lance les tests Node (contrat du formateur, `compterMots`, `/api/conseil`, serveur) et doit afficher `fail 0`. `npm run lint` ne doit rien signaler.
+
+Les tests navigateur sont facultatifs. Ils téléchargent Chromium la première fois (environ 150 Mo) :
+
+```sh
+npx playwright install chromium
+npm run test:browser
+```
+
 ## Les 3 modules de `public/js`
 
-- `brain.js` : le cerveau. Fonctions pures (aucun accès à la page) : `validateMessage` vérifie un message (texte, non vide, `LIMITE` caractères au plus), `replyTo` choisit la réponse.
+- `brain.js` : le cerveau. Fonctions pures, sans accès à la page : `validateMessage` vérifie un message (du texte, non vide, `LIMITE` caractères au plus après `trim`), `replyTo` choisit la réponse, `compterMots` compte les mots.
 - `view.js` : l'affichage. `renderMessages` fabrique une ligne `li` par message avec `textContent`, sans jamais injecter de HTML.
-- `app.js` : le câblage. Il écoute le formulaire et le bouton « Effacer », appelle `brain.js`, garde l'historique dans `localStorage` (clé `capweb.historique`) et demande l'affichage à `view.js`.
+- `app.js` : le câblage. Il écoute le formulaire (Entrée envoie, Maj+Entrée va à la ligne), le compteur et le bouton « Effacer ». Il appelle `brain.js`, garde l'historique dans `localStorage` (clé `capweb.historique`), demande l'affichage à `view.js`, et appelle le serveur avec `fetch` (`afficherVersion`, `demanderConseil`).
+
+## La route `/api/conseil`
+
+`GET /api/conseil` renvoie un conseil tiré au hasard parmi trois, en JSON :
+
+```json
+{ "conseil": "Relisez vos notes de cours le soir même : dix minutes suffisent pour retenir bien plus." }
+```
+
+Statut 200, en-tête `content-type: application/json; charset=utf-8`. Dans la page, le message « conseil » appelle cette route avec `fetch`. Si le serveur ne répond pas, AskEfrei affiche « Le serveur ne répond pas : conseil indisponible. » au lieu de planter. Elle est vérifiée par `tests/conseil.test.js`.
+
+Le serveur sert aussi `GET /version.json` (`{ "version": "…" }`), affiché dans le pied de page, ou « version indisponible » en cas de panne.
 
 ## Arborescence
 
@@ -59,4 +93,6 @@ atelier/
 └── package.json             scripts npm et dépendances de développement
 ```
 
-Les réglages du binôme (limite et deux mots) sont dans `cahier-personnel.json`, recopiés en haut de `brain.js`. On ne modifie jamais `tests/contrat/`, `browser/contrat.spec.js` ni `cahier-personnel.json`.
+## Règles du projet
+
+Les réglages du binôme (limite 240 et deux mots) sont dans `cahier-personnel.json`, recopiés en haut de `brain.js`. On ne modifie jamais `tests/contrat/`, `browser/contrat.spec.js` ni `cahier-personnel.json`. Les conventions et les interdits sont dans [AGENTS.md](AGENTS.md), et la spécification dans [SPEC.md](SPEC.md).
