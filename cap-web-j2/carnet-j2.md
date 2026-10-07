@@ -130,3 +130,22 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 - Dans `app.js`, `async function demanderConseil()` appelle `/api/conseil` avec `fetch`, vérifie `reponse.ok` et le JSON, et renvoie « Le serveur ne répond pas : conseil indisponible. » en cas d'erreur.
 - L'écouteur `submit` devient `async` : si le message (en minuscules) vaut « conseil », la réponse est `await demanderConseil()`, sinon `replyTo` comme avant. Le message de l'utilisateur s'affiche avant l'attente. La phrase « aide » mentionne maintenant « conseil ».
 - Vérifié dans Chromium : « Conseil » affiche un des trois conseils ; serveur arrêté, page déjà ouverte, « conseil » affiche le message d'erreur, le formulaire reste visible et aucune erreur JavaScript.
+
+### Étape 8 · Le projet sur GitHub, à deux
+
+- Le binôme a choisi de garder le dépôt public `luminescencedev/b13-askefrei` (déjà partagé avec le formateur), au lieu d'un nouveau dépôt `cap-web`. Le projet est dans `cap-web-j2/atelier`.
+- Noé (`LilStick`) est invité comme collaborateur. Il reste à faire de son côté : accepter l'invitation, `git clone`, puis `npm ci` et `npm start` dans `cap-web-j2/atelier`.
+
+### Étape 9 · Chacun sa branche
+
+- Arthur : branche `docs/arborescence`, commit « docs: arborescence du projet », pull request #1.
+- Noé : branche `feat/couleur` dans `public/styles.css`, à faire de son côté.
+
+### Étape 11 · Les quatre attaques
+
+Vérifiées dans Chromium, à 375 px de large :
+
+1. Serveur arrêté, puis « conseil » : la réponse « Le serveur ne répond pas : conseil indisponible. » s'affiche, et la page reste utilisable. **Tient.**
+2. Message plus long que 240 caractères : **l'attaque passait.** Le champ avait `maxLength = LIMITE`, donc un texte de 260 caractères collé était coupé à 240 sans prévenir, puis envoyé. Corrigé dans le commit `dabe5f7` : plus de `maxLength`, le compteur affiche « 260 / 240 : trop long », et l'envoi est refusé avec « Le message doit contenir 240 caractères au maximum. ». **Tient.**
+3. `<b>test</b>` s'affiche tel quel, chevrons compris : aucun élément `b` dans la conversation. **Tient.**
+4. À 375 px, tout reste lisible, même un message de 240 caractères sans espace (`overflow-wrap: break-word`), et il n'y a pas de défilement horizontal. **Tient.**

@@ -35,7 +35,8 @@ function charger() {
 
 // Compteur « n / LIMITE » sous le champ.
 function mettreAJourCompteur() {
-  compteur.textContent = `${champ.value.length} / ${LIMITE}`;
+  const longueur = champ.value.trim().length;
+  compteur.textContent = longueur > LIMITE ? `${longueur} / ${LIMITE} : trop long` : `${longueur} / ${LIMITE}`;
 }
 
 champ.addEventListener('input', mettreAJourCompteur);
@@ -97,8 +98,8 @@ effacer.addEventListener('click', () => {
   statut.textContent = 'Conversation effacée.';
 });
 
-// La limite vient de brain.js : un seul endroit à modifier.
-champ.maxLength = LIMITE;
+// La limite vient de brain.js : un seul endroit à modifier. Pas de maxLength sur le champ :
+// un texte trop long collé serait coupé sans prévenir ; validateMessage le refuse avec une erreur visible.
 limiteElt.textContent = String(LIMITE);
 mettreAJourCompteur();
 
