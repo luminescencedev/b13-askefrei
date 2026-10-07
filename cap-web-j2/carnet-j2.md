@@ -101,3 +101,9 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 
 - `<p id="compteur">` sous le champ, relié au `textarea` par `aria-describedby="compteur"`. Dans `app.js`, `mettreAJourCompteur()` écrit « longueur / 240 » au chargement, à chaque événement `input` et après l'envoi.
 - Vérifié dans Chromium : « 0 / 240 » au départ, « 5 / 240 » après avoir tapé `salut`, « 0 / 240 » après l'envoi, aucune erreur dans la console.
+
+### Étape 3 · L'accessibilité avec Lighthouse
+
+- Lighthouse 13.5 (Chromium, catégorie Accessibilité seule), page complète : **100**.
+- Sans la balise `label` du champ : **93**, avec l'alerte « Form elements do not have associated labels » (audit `label`). Label remis ensuite : `git status` ne liste plus `index.html`.
+- Essai au clavier seul : un Tab suffit pour atteindre le champ. Problème trouvé : Entrée ajoute un retour à la ligne dans le `textarea` au lieu d'envoyer, et le message n'est pas envoyé. Corrigé juste après (commit `fix:` séparé) : Entrée envoie, Maj+Entrée va à la ligne.
