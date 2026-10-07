@@ -48,3 +48,15 @@ export function replyTo(message) {
   // Message inconnu : une réponse de repli, distincte de « aide ».
   return REPONSES.repli;
 }
+
+// Compte les mots d'un message : tout bloc d'espaces (espace, tabulation, retour à la ligne) sépare deux mots.
+export function compterMots(message) {
+  if (typeof message !== 'string') {
+    return 0;
+  }
+  const texte = message.trim();
+  if (texte === '') {
+    return 0;
+  }
+  return texte.split(/\s+/).length;
+}
