@@ -58,15 +58,21 @@ Après les 3 demandes, `git status --short -- .` n'affiche rien : aucun fichier 
 
 | À remplir | Votre réponse |
 |---|---|
-| Fonction tirée | |
-| Le rouge vu (message exact) | |
-| Identifiant du commit `test:` | |
-| Identifiant du commit `feat:` | |
-| Casse volontaire : la ligne changée | |
-| Casse volontaire : le test devenu rouge | |
-| Pour aller plus loin : la deuxième fonction | |
+| Fonction tirée | F2 `compterMots(message)` |
+| Le rouge vu (message exact) | `SyntaxError: The requested module '../public/js/brain.js' does not provide an export named 'compterMots'` |
+| Identifiant du commit `test:` | `7286884` |
+| Identifiant du commit `feat:` | `a2a4a5d` |
+| Casse volontaire : la ligne changée | `return texte.split(/\s+/).length;` remplacée par `return 1;` |
+| Casse volontaire : le test devenu rouge | « C1 : compte les mots séparés par une espace » et « C2 : plusieurs espaces, une tabulation ou un retour à la ligne séparent aussi les mots » |
+| Pour aller plus loin : la deuxième fonction | non faite |
 
 Les critères C1 à C5 de votre fonction, recopiés de la fiche :
+
+- C1 : `'salut'` donne 1, `'où est le refuge'` donne 4.
+- C2 : `'un   deux'` donne 2, `'un\tdeux\ntrois'` donne 3.
+- C3 : `'   salut   '` donne 1.
+- C4 : `''` et les espaces seuls donnent 0.
+- C5 : ce qui n'est pas du texte donne 0, sans erreur.
 
 ## R4 · La revue de code
 
