@@ -31,4 +31,32 @@ npm run lint
 - `view.js` : l'affichage. `renderMessages` fabrique une ligne `li` par message avec `textContent`, sans jamais injecter de HTML.
 - `app.js` : le câblage. Il écoute le formulaire et le bouton « Effacer », appelle `brain.js`, garde l'historique dans `localStorage` (clé `capweb.historique`) et demande l'affichage à `view.js`.
 
+## Arborescence
+
+```text
+atelier/
+├── public/                  ce que le navigateur reçoit
+│   ├── index.html           la page : formulaire, conversation, compteur, pied de page
+│   ├── styles.css           mise en page, version mobile (< 600 px) et thème sombre
+│   └── js/
+│       ├── app.js           câblage : événements, historique, fetch de /version.json et /api/conseil
+│       ├── brain.js         règles pures : validateMessage, replyTo, compterMots
+│       └── view.js          affichage : renderMessages, en texte seulement
+├── server/
+│   ├── app.js               serveur HTTP : fichiers publics, /version.json, /api/conseil
+│   └── start.js             lance le serveur sur 127.0.0.1:3000 (npm start)
+├── tests/                   tests Node (npm test)
+│   ├── contrat/             contrat du formateur : ne jamais modifier
+│   ├── harnais/             tests des scripts de contrôle
+│   ├── compterMots.test.js  critères C1 à C5 de compterMots
+│   ├── conseil.test.js      la route /api/conseil répond en JSON
+│   └── server.test.js       le serveur sert les bons fichiers
+├── browser/                 tests navigateur Playwright (npm run test:browser)
+├── scripts/                 contrôles : dépendances, tests modifiés, build statique
+├── cahier-personnel.json    réglages du binôme b13 : ne jamais modifier
+├── AGENTS.md                conventions et interdits du projet
+├── SPEC.md                  5 critères, chacun avec sa vérification
+└── package.json             scripts npm et dépendances de développement
+```
+
 Les réglages du binôme (limite et deux mots) sont dans `cahier-personnel.json`, recopiés en haut de `brain.js`. On ne modifie jamais `tests/contrat/`, `browser/contrat.spec.js` ni `cahier-personnel.json`.
