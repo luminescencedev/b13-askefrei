@@ -118,3 +118,9 @@ Chacun, une phrase : ce que vous savez faire ce soir et que vous ne saviez pas f
 - Le `fetch` en `.then` devient `async function afficherVersion()`, avec `await`, `try`/`catch` et la vérification de `reponse.ok`.
 - Vérifié dans Chromium : pied de page « version dev » avec `/version.json` ; « version indisponible » avec `/version2.json` (404) ; « version dev » de nouveau une fois le bon chemin remis.
 - Bonus fait avant : thème sombre avec `prefers-color-scheme: dark`, en changeant seulement les variables de `:root`. axe-core ne trouve aucune violation en clair ni en sombre.
+
+### Étape 6 · La route /api/conseil
+
+- Dans `server/app.js`, au-dessus de `/version.json` : `/api/conseil` renvoie `{ "conseil": "…" }`, tiré au hasard parmi 3 conseils (tableau `CONSEILS`), avec `content-type: application/json`.
+- Après redémarrage du serveur, http://127.0.0.1:3000/api/conseil affiche par exemple `{"conseil":"Relisez vos notes de cours le soir même : dix minutes suffisent pour retenir bien plus."}`.
+- Test `tests/conseil.test.js` (copie de `server.test.js` jusqu'à `after`, puis un seul test) : statut 200, `content-type` qui contient `application/json`, et `conseil` est un texte non vide. Vu rouge avant la route (`actual: 404`), vert après. `npm test` : pass 50, fail 0.
