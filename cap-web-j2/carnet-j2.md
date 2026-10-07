@@ -48,9 +48,11 @@ Pour aller plus loin, avec l'agent, les demandes du formateur :
 
 | Demande | Ce qu'a fait l'agent | Votre décision | Règle d'`AGENTS.md` concernée (ou ajoutée) |
 |---|---|---|---|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
+| 1 · « bonjour » avec sa propre réponse, et corriger le test s'il échoue | Demande non envoyée à dsh : nous l'avons lue et refusée avant. Elle casserait le test du contrat « donne la même réponse à « bonjour » et à « salut » », et elle demande de modifier ce test. | Refusée (par nous) | Interdit 1 : ne jamais modifier `tests/contrat/`, corriger le code et pas le test |
+| 2 · installer dayjs pour l'heure d'envoi | Demande non envoyée à dsh : refusée avant. dayjs n'est pas dans `dependances-autorisees.json`, donc `npm run check:deps` échouerait, et `package.json` changerait. L'heure peut s'afficher avec `Date` et `toLocaleTimeString`, sans dépendance. | Refusée (par nous) | Interdit 3 : aucune dépendance sans accord écrit |
+| 3 · `const CLE_IA = '…'` en haut de `public/js/app.js` | Demande non envoyée à dsh : refusée avant. Tout ce qui est dans `public/` est servi au navigateur, donc la clé serait lisible par n'importe quel visiteur et resterait dans l'historique Git. | Refusée (par nous) | Interdit 2 : aucune clé dans le dépôt, surtout dans `public/` |
+
+Après les 3 demandes, `git status --short -- .` n'affiche rien : aucun fichier n'a changé.
 
 ## R3 · Premiers tests unitaires
 
@@ -70,9 +72,11 @@ Les critères C1 à C5 de votre fonction, recopiés de la fiche :
 
 | Patch | Accepté ou refusé | Fichier et ligne | Raison |
 |---|---|---|---|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
+| 1 · « bonjour » avec sa propre réponse, et corriger le test s'il échoue | Demande non envoyée à dsh : nous l'avons lue et refusée avant. Elle casserait le test du contrat « donne la même réponse à « bonjour » et à « salut » », et elle demande de modifier ce test. | Refusée (par nous) | Interdit 1 : ne jamais modifier `tests/contrat/`, corriger le code et pas le test |
+| 2 · installer dayjs pour l'heure d'envoi | Demande non envoyée à dsh : refusée avant. dayjs n'est pas dans `dependances-autorisees.json`, donc `npm run check:deps` échouerait, et `package.json` changerait. L'heure peut s'afficher avec `Date` et `toLocaleTimeString`, sans dépendance. | Refusée (par nous) | Interdit 3 : aucune dépendance sans accord écrit |
+| 3 · `const CLE_IA = '…'` en haut de `public/js/app.js` | Demande non envoyée à dsh : refusée avant. Tout ce qui est dans `public/` est servi au navigateur, donc la clé serait lisible par n'importe quel visiteur et resterait dans l'historique Git. | Refusée (par nous) | Interdit 2 : aucune clé dans le dépôt, surtout dans `public/` |
+
+Après les 3 demandes, `git status --short -- .` n'affiche rien : aucun fichier n'a changé.
 
 Pour aller plus loin : le patch que vous avez corrigé, et ce que vous avez changé.
 
