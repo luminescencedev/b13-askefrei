@@ -95,4 +95,4 @@ atelier/
 
 ## Règles du projet
 
-Les réglages du binôme (limite 240 et deux mots) sont dans `cahier-personnel.json`, recopiés en haut de `brain.js`. On ne modifie jamais `tests/contrat/`, `browser/contrat.spec.js` ni `cahier-personnel.json`. Les conventions et les interdits sont dans [AGENTS.md](AGENTS.md), et la spécification dans [SPEC.md](SPEC.md).
+Les réglages du binôme (limite 240, mots « orage » et « bougie ») sont dans `cahier-personnel.json` et recopiés en haut de `brain.js` ; le troisième mot, « partiels », a été ajouté en J3 dans `brain.js` seulement. On ne modifie jamais `tests/contrat/`, `browser/contrat.spec.js` ni `cahier-personnel.json`. Les conventions et les interdits sont dans [AGENTS.md](AGENTS.md), et la spécification dans [SPEC.md](SPEC.md).
