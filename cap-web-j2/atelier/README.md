@@ -49,7 +49,7 @@ npm run test:browser
 
 ## Les 3 modules de `public/js`
 
-- `brain.js` : le cerveau. Fonctions pures, sans accès à la page : `validateMessage` vérifie un message (du texte, non vide, `LIMITE` caractères au plus après `trim`), `replyTo` choisit la réponse, `compterMots` compte les mots.
+- `brain.js` : le cerveau. Fonctions pures, sans accès à la page : `validateMessage` vérifie un message (du texte, non vide, `LIMITE` caractères au plus après `trim`), `replyTo` choisit la réponse, `compterMots` compte les mots, `estMessage` vérifie qu'un élément de l'historique est bien un message.
 - `view.js` : l'affichage. `renderMessages` fabrique une ligne `li` par message avec `textContent`, sans jamais injecter de HTML.
 - `app.js` : le câblage. Il écoute le formulaire (Entrée envoie, Maj+Entrée va à la ligne), le compteur et le bouton « Effacer ». Il appelle `brain.js`, garde l'historique dans `localStorage` (clé `capweb.historique`), demande l'affichage à `view.js`, et appelle le serveur avec `fetch` (`afficherVersion`, `demanderConseil`).
 
@@ -63,7 +63,11 @@ npm run test:browser
 
 Statut 200, en-tête `content-type: application/json; charset=utf-8`. Dans la page, le message « conseil » appelle cette route avec `fetch`. Si le serveur ne répond pas, AskEfrei affiche « Le serveur ne répond pas : conseil indisponible. » au lieu de planter. Elle est vérifiée par `tests/conseil.test.js`.
 
-Le serveur sert aussi `GET /version.json` (`{ "version": "…" }`), affiché dans le pied de page, ou « version indisponible » en cas de panne.
+Le serveur sert aussi `GET /version.json` (`{ "version": "1.0.0" }`). La version est lue dans `package.json` (un seul endroit) et affichée dans le pied de page, ou « version indisponible » en cas de panne.
+
+## Intégration continue
+
+À chaque push et à chaque pull request, GitHub Actions (`.github/workflows/ci.yml`, à la racine du dépôt) installe le projet sur une machine neuve, puis lance `npm ci`, `npm run lint` et `npm test` dans `cap-web-j2/atelier`. Le résultat est visible dans l'onglet Actions du dépôt.
 
 ## Arborescence
 
@@ -74,7 +78,7 @@ atelier/
 │   ├── styles.css           mise en page, version mobile (< 600 px) et thème sombre
 │   └── js/
 │       ├── app.js           câblage : événements, historique, fetch de /version.json et /api/conseil
-│       ├── brain.js         règles pures : validateMessage, replyTo, compterMots
+│       ├── brain.js         règles pures : validateMessage, replyTo, compterMots, estMessage
 │       └── view.js          affichage : renderMessages, en texte seulement
 ├── server/
 │   ├── app.js               serveur HTTP : fichiers publics, /version.json, /api/conseil
@@ -84,6 +88,7 @@ atelier/
 │   ├── harnais/             tests des scripts de contrôle
 │   ├── compterMots.test.js  critères C1 à C5 de compterMots
 │   ├── conseil.test.js      la route /api/conseil répond en JSON
+│   ├── messages.test.js     estMessage refuse null, un rôle inconnu, un texte non textuel
 │   └── server.test.js       le serveur sert les bons fichiers
 ├── browser/                 tests navigateur Playwright (npm run test:browser)
 ├── scripts/                 contrôles : dépendances, tests modifiés, build statique

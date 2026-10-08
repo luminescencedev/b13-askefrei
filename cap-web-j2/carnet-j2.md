@@ -149,3 +149,12 @@ Vérifiées dans Chromium, à 375 px de large :
 2. Message plus long que 240 caractères : **l'attaque passait.** Le champ avait `maxLength = LIMITE`, donc un texte de 260 caractères collé était coupé à 240 sans prévenir, puis envoyé. Corrigé dans le commit `dabe5f7` : plus de `maxLength`, le compteur affiche « 260 / 240 : trop long », et l'envoi est refusé avec « Le message doit contenir 240 caractères au maximum. ». **Tient.**
 3. `<b>test</b>` s'affiche tel quel, chevrons compris : aucun élément `b` dans la conversation. **Tient.**
 4. À 375 px, tout reste lisible, même un message de 240 caractères sans espace (`overflow-wrap: break-word`), et il n'y a pas de défilement horizontal. **Tient.**
+
+### Étapes bonus 13 à 18
+
+- **13 · Historique abîmé** (`fix: historique abîmé ignoré`) : avec `[null]` dans `capweb.historique`, la page plantait (« Cannot read properties of null (reading 'role') »). `estMessage` dans `brain.js`, puis `donnees.filter(estMessage)` dans `charger()` : plus d'erreur, et une vraie conversation revient toujours après rechargement.
+- **14 · Test de estMessage** (`test: estMessage`) : 4 tests dans `tests/messages.test.js`. Avec `return true;` à la place du corps, 3 tests rougissent (null, rôle « pirate », texte nombre). Code remis : pass 54, fail 0.
+- **15 · Entrée envoie** (`feat: Entrée envoie le message`) : déjà fait à l'étape 3 (commit `4611e1c`). Le commit bonus est vide et le dit dans son message. Revérifié : Maj+Entrée va à la ligne, Entrée envoie.
+- **16 · Compteur qui prévient** (`feat: le compteur prévient avant la limite`) : classe `alerte` à partir de 216 caractères (90 % de 240), retirée après l'envoi. Couleur dans une variable `--alerte` (`#b00020` en clair, `#ff8a80` en sombre, pour rester lisible sur fond foncé). Lighthouse Accessibilité : 100, et axe ne trouve aucune violation dans les deux thèmes.
+- **17 · CI** (`ci: lint et tests à chaque push`) : `.github/workflows/ci.yml` à la racine du dépôt, avec `working-directory: cap-web-j2/atelier` (notre projet n'est pas à la racine). Première exécution : coche verte.
+- **18 · Version 1.0.0** (`feat: version 1.0.0`) : `start.js` lit la version dans `package.json` (`import … with { type: 'json' }`), `npm version 1.0.0 --no-git-tag-version`, étiquette `v1.0.0` poussée, release GitHub publiée. Pied de page : « version 1.0.0 ».
