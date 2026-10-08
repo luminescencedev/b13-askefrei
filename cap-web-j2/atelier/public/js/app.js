@@ -37,6 +37,7 @@ function charger() {
 function mettreAJourCompteur() {
   const longueur = champ.value.trim().length;
   compteur.textContent = longueur > LIMITE ? `${longueur} / ${LIMITE} : trop long` : `${longueur} / ${LIMITE}`;
+  compteur.classList.toggle('alerte', longueur >= LIMITE * 0.9);
 }
 
 champ.addEventListener('input', mettreAJourCompteur);

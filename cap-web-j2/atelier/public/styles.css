@@ -8,6 +8,7 @@
   --fond-bot: #eef3ff;
   --fond-survol: #f2f3f5;
   --texte-bouton: #ffffff;
+  --alerte: #b00020;
 }
 
 * {
@@ -140,5 +141,12 @@ footer {
     --fond-bot: #1c2433;
     --fond-survol: #252a33;
     --texte-bouton: #ffffff;
+    --alerte: #ff8a80;
   }
+}
+
+/* Compteur à 90 % de la limite ou plus : il prévient avant l'erreur. */
+#compteur.alerte {
+  color: var(--alerte);
+  font-weight: 700;
 }
