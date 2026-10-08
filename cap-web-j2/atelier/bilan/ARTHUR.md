@@ -6,12 +6,12 @@ Absent le mardi (J2) : pas de positionnement écrit dans le carnet ce jour-là. 
 
 | Notion | Départ |
 |---|---|
-| Structure HTML | à compléter |
-| CSS et responsive | à compléter |
-| JavaScript | à compléter |
-| DOM et événements | à compléter |
-| Git | à compléter |
-| Tests | à compléter |
+| Structure HTML | à l'aise |
+| CSS et responsive | à l'aise |
+| JavaScript | à l'aise |
+| DOM et événements | à l'aise |
+| Git | à l'aise |
+| Tests | à l'aise |
 
 ## Deux acquis, chacun prouvé par un commit
 
