@@ -19,7 +19,7 @@ Chacun, en une phrase, son objectif personnel pour J2 et J3.
 
 Membre 1 :
 
-Membre 2 :
+Membre 2 : D'ici la soutenance de vendredi, savoir expliquer seul ce qui se passe quand on envoie un message, de la touche Entrée jusqu'à l'affichage de la réponse.
 
 ## R1 · Les tests automatisés
 
