@@ -17,7 +17,7 @@ Pour chaque notion, chacun écrit « à l'aise » ou « à renforcer ». Ce n'es
 
 Chacun, en une phrase, son objectif personnel pour J2 et J3.
 
-Membre 1 :
+Membre 1 : D'ici la soutenance de vendredi, expliquer éditeur fermé chaque fonction de app.js, brain.js et view.js, et refaire seul une route JSON avec son test.
 
 Membre 2 : D'ici la soutenance de vendredi, savoir expliquer seul ce qui se passe quand on envoie un message, de la touche Entrée jusqu'à l'affichage de la réponse.
 
