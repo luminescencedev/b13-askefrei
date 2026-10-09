@@ -7,3 +7,6 @@ node_modules/
 .env
 .env.*
 cap-web-j2/abordage/essai-*/
+soutenance/
+PREPARATION-SOUTENANCE.md
+POUR-NOE.txt
